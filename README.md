@@ -1,5 +1,3 @@
-frontend-nanodegree-arcade-game
-===============================
 
 # Vamsi Manohar Classic Aracade Game
 
