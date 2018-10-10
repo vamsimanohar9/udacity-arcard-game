@@ -1,13 +1,21 @@
+// Enemies our player must avoid
 var Enemy = function(x, y, speed) {
-
+    // Variables applied to each of our instances go here,
+    // we've provided one for you to get started
     this.x = x;
     this.y = y;
     this.speed = speed;
+
+    // The image/sprite for our enemies, this uses
+    // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
 };
-
+// Update the enemy's position, required method for game
+// Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-
+    // You should multiply any movement by the dt parameter
+    // which will ensure the game runs at the same speed for
+    // all computers.
     this.x = this.x + this.speed * dt;
     if (this.x >= 505) {
         this.x = 0;
@@ -18,7 +26,7 @@ Enemy.prototype.update = function(dt) {
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
-
+//checks en enemy's collision with player
 Enemy.prototype.checkCollision = function() {
     if (player.y + 131 >= this.y + 90 &&
         player.y + 73 <= this.y + 135 &&
@@ -28,14 +36,16 @@ Enemy.prototype.checkCollision = function() {
         gameReset();
     }
 };
-
+// Now write your own player class
+// This class requires an update(), render() and
+// a handleInput() method.
 var Player = function(x, y, speed) {
     this.x = x;
     this.y = y;
     this.speed = speed;
     this.sprite = 'images/char-boy.png';
 };
-
+// Update method for Player
 Player.prototype.update = function() {};
 
 Player.prototype.render = function() {
@@ -93,10 +103,10 @@ document.addEventListener('keyup', function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
-
+//score of player
 var score = 0;
 
-
+//reset the gamem
 function gameReset() {
     player.reset();
     score = 0;
@@ -107,7 +117,7 @@ function gameReset() {
         new Enemy(0, Math.random() * 150 + 70, Math.random() * 100 + 60)
     );
 }
-
+//game over
 function gameOver() {
     player.reset();
     score += 1;
@@ -116,7 +126,7 @@ function gameOver() {
         allEnemies.push(new Enemy(0, Math.random() * 160 + 50, Math.random() * 90 + 70));
     }
 }
-
+// updates the on screen score display
 function updateDisplay() {
     scoreDiv.innerHTML = 'Score ' + score;
 }
